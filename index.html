@@ -613,24 +613,24 @@
         <div class="row"><span class="lbl">Timing</span><span>Mon–Sat, 6:00 AM – 9:00 PM · Emergency 24x7</span></div>
       </div>
     </div>
-    <form id="apptForm">
+    <form name="appointment" method="POST" data-netlify="true" id="appform">
       <div class="field">
         <label for="name">Poora Naam</label>
-        <input type="text" id="name" placeholder="Aapka naam" required>
+        <input type="text" id="name" name="name" placeholder="Aapka naam" required>
       </div>
       <div class="field-row">
         <div class="field">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="98xxxxxxx0" required>
+          <input type="tel" id="phone" name="phone"  placeholder="98xxxxxxx0" required>
         </div>
         <div class="field">
           <label for="date">Preferred Date</label>
-          <input type="date" id="date" required>
+          <input type="date" id="date" name="data" required>
         </div>
       </div>
       <div class="field">
         <label for="service">Service Chahiye</label>
-        <select id="service">
+        <select id="service" name="service">
           <option>Hemodialysis</option>
           <option>Peritoneal Dialysis</option>
           <option>Emergency Dialysis</option>
@@ -639,7 +639,6 @@
       </div>
       <button type="submit" class="btn-primary" style="width:100%;border:none;">Appointment Request Bhejein</button>
       <div class="success-msg" id="successMsg">Dhanyawaad! Aapka request mil gaya hai — hamari team jaldi contact karegi.</div>
-      <p class="form-note">Yeh ek demo form hai. Live karne ke liye backend/email service connect karna hoga.</p>
     </form>
   </div>
 </section>
@@ -709,11 +708,6 @@
   setInterval(() => { showTesti((tIndex+1) % testimonials.length); }, 5000);
 
   // Appointment form
-  document.getElementById('apptForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById('successMsg').style.display = 'block';
-    this.reset();
-  });
 </script>
 
 </body>
