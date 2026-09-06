@@ -606,6 +606,98 @@
     </div>
   </div>
 </section>
+  <section id="feedback-form">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <span class="eyebrow">Share Your Experience</span>
+      <h2>Apna feedback aur rating dein</h2>
+    </div>
+
+    <form name="patient-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="feedback-form-wrap reveal" id="feedbackForm">
+      <input type="hidden" name="form-name" value="patient-feedback" />
+      <p style="display:none;">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <div class="form-group">
+        <label for="fbName">Aapka naam</label>
+        <input type="text" id="fbName" name="name" required placeholder="Jaise: Anil Kumar" />
+      </div>
+
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-rating" id="starRating">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <input type="hidden" id="ratingValue" name="rating" required />
+      </div>
+
+      <div class="form-group">
+        <label for="fbMessage">Aapka experience</label>
+        <textarea id="fbMessage" name="message" rows="4" required placeholder="Apna experience yahan likhein..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Feedback Submit Karein</button>
+      <p id="fbSuccessMsg" style="display:none;color:#1f8a4c;margin-top:10px;">Dhanyawad! Aapka feedback mil gaya hai.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+.feedback-form-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.form-group { margin-bottom: 20px; }
+.form-group label { display:block; margin-bottom:8px; font-weight:500; }
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.star-rating { font-size: 32px; cursor: pointer; }
+.star-rating .star { color: #ccc; transition: color 0.2s; }
+.star-rating .star.active { color: #f5a623; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const stars = document.querySelectorAll('#starRating .star');
+  const ratingInput = document.getElementById('ratingValue');
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = star.getAttribute('data-value');
+      ratingInput.value = value;
+      stars.forEach(s => {
+        s.classList.toggle('active', s.getAttribute('data-value') <= value);
+      });
+    });
+  });
+
+  const form = document.getElementById('feedbackForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      if (!ratingInput.value) {
+        e.preventDefault();
+        alert('Kripya rating select karein.');
+      }
+    });
+  }
+});
+</script>
 
 <!-- APPOINTMENT -->
 <section class="appt" id="appointment">
